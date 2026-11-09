@@ -242,3 +242,19 @@ stopped (matched only by my debug port/temp profile, never the owner's browsers)
 
 **Verification:** `npm run check` → 44/44, typecheck, lint, format; `npm run build` clean; built HTML has 0 unfilled
 `%tokens%`, absolute OG URLs, `og-image.png` in `dist/`; brand link accessible name confirmed from built markup.
+
+---
+
+## Step 9: Remove the dark line under the header (v0.2.1) · 2026-11-09
+
+**Report:** owner saw a thin black line crossing the page (over their new profile photo) while scrolling.
+
+**Root cause (reproduced in a browser):** `elementsFromPoint` showed the 68th pixel row belonged only to
+`header.site-header`. The header had `border-bottom: 1px solid transparent` and a fading gradient background. A
+background is sized to the padding box but painted under the border and repeated, so the 1px border row showed the
+gradient's darkest first row again (`rgb(5 6 13 / 0.85)`): a near-black line that moves with the sticky header.
+
+**Fix:** removed the unused transparent border and its transition; the gradient is `no-repeat`. Header height
+69px → 68px.
+
+**Verification:** before/after screenshots at the same scroll position (y=260) show the line gone; `npm run check` 44/44.

@@ -179,17 +179,13 @@ p {
 /* ==========================================================================
    Header
    ========================================================================== */
+/* No border here: a transparent border makes the gradient (sized to the padding box) repeat
+   into the border row, drawing a dark 1px line across the page (fixed in v0.2.1). */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 20;
-  border-bottom: 1px solid transparent;
-  transition:
-    background 0.3s,
-    border-color 0.3s;
-}
-.site-header:has(+ main) {
-  background: linear-gradient(180deg, rgb(5 6 13 / 0.85), rgb(5 6 13 / 0));
+  background: linear-gradient(180deg, rgb(5 6 13 / 0.85), rgb(5 6 13 / 0)) no-repeat;
 }
 
 .nav {
