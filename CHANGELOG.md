@@ -5,6 +5,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-09
+
+### Fixed
+
+- Thin dark line under the sticky header (visible over the profile photo while scrolling).
+
 ## [0.2.0] - 2026-11-09
 
 ### Added
