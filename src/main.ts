@@ -2,7 +2,7 @@ import './styles/main.css';
 import { config } from './config';
 import snapshotJson from './data/repos.json';
 import { fetchLiveRepos, mergeRepos } from './github/api';
-import { normalizeRepo } from './github/normalize';
+import { normalizeRepo, withShowcase } from './github/normalize';
 import { applyFilter, filterFromQuery, languagesOf, pickFeatured } from './projects/filter';
 import { computeStats } from './projects/stats';
 import type { FilterState, Project, Snapshot, SnapshotRepo } from './types';
@@ -24,9 +24,10 @@ function $<T extends HTMLElement = HTMLElement>(
 }
 
 function toProjects(repos: readonly SnapshotRepo[]): Project[] {
-  return repos
+  const fromRepos = repos
     .filter((r) => !config.exclude.includes(r.name))
     .map((r) => normalizeRepo(r, r.readme_excerpt, config, r.demo_status));
+  return withShowcase(fromRepos, config.showcase);
 }
 
 const dom = {

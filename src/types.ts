@@ -44,8 +44,11 @@ export interface Project {
   name: string;
   title: string;
   description: string;
-  url: string;
+  /** Repository URL; null when the source is private (SPEC F10). */
+  url: string | null;
   demoUrl: string | null;
+  /** True for showcase projects whose repository is private. */
+  privateSource: boolean;
   language: string | null;
   topics: string[];
   stars: number;
@@ -55,6 +58,19 @@ export interface Project {
   createdAt: string;
   updatedAt: string;
   categories: Category[];
+}
+
+/** A project listed from config because its repository is private (SPEC F10, ADR-0006). */
+export interface ShowcaseEntry {
+  name: string;
+  title: string;
+  description: string;
+  /** Same-site path (e.g. "demos/duborsub/") or absolute http(s) URL. */
+  demo: string;
+  language: string | null;
+  topics: readonly string[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type SortKey = 'updated' | 'created' | 'name' | 'stars';

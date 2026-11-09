@@ -1,3 +1,5 @@
+import type { ShowcaseEntry } from './types.ts';
+
 /**
  * Owner-editable configuration (SPEC F8).
  * Change text here; no UI code needs to change.
@@ -44,6 +46,24 @@ export const config = {
   featured: ['hearty-home-site', 'duborsub', 'uni-project', 'flight-site'] as readonly string[],
   featuredLimit: 4,
 
+  /**
+   * Projects with a private repository, listed with a live demo instead of source (SPEC F10).
+   * A showcase entry replaces any public repo of the same name.
+   */
+  showcase: [
+    {
+      name: 'duborsub',
+      title: 'Dub or Sub?',
+      description:
+        'Sub and dub ratings for every anime, side by side. Full-stack: Next.js, NestJS, PostgreSQL/Prisma, email accounts and admin moderation over a 38,000-title catalogue. Try the interactive demo.',
+      demo: 'demos/duborsub/',
+      language: 'TypeScript',
+      topics: ['nextjs', 'nestjs', 'postgresql', 'prisma'],
+      createdAt: '2026-03-19T00:00:00Z',
+      updatedAt: '2026-11-09T05:15:03Z',
+    },
+  ] as readonly ShowcaseEntry[],
+
   /** Name prefixes that mark a repo as school coursework. */
   courseworkPrefixes: ['wdd', 'cse'] as readonly string[],
 
@@ -54,7 +74,6 @@ export const config = {
    */
   titles: {
     portfilio: 'This Portfolio',
-    duborsub: 'Dub or Sub?',
     'uni-project': 'University Attendance Platform',
     module1: 'TypeScript Fluency (Module 1)',
     giovanni_site: 'GiovanniMarris Culinary Arts',
@@ -79,8 +98,6 @@ export const config = {
   descriptions: {
     portfilio:
       'The site you are looking at: every public repo pulled live from the GitHub API over a hand-written WebGL2 nebula and 16k-particle background. Vite + strict TypeScript, tested, CI-deployed.',
-    duborsub:
-      'Sub and dub ratings for every anime, side by side, so you can decide how to watch before you start.',
     'hearty-home-site':
       'React, Tailwind CSS and Framer Motion site for Hearty Home Services: cleaning, specialist hoarding support and home services, built to make booking simple.',
     'flight-site':

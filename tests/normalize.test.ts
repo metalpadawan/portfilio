@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { demoUrlFor, normalizeRepo, prettifyName, safeUrl } from '../src/github/normalize';
+import {
+  demoUrlFor,
+  normalizeRepo,
+  prettifyName,
+  safeUrl,
+  showcaseToProject,
+  withShowcase,
+} from '../src/github/normalize';
 import { classifyDemoStatus, sizedAvatar } from '../src/github/urls';
 import { categorize, isCourseworkName } from '../src/projects/categorize';
 import { repo } from './fixtures';
@@ -121,5 +128,42 @@ describe('sizedAvatar', () => {
       'https://avatars.githubusercontent.com/u/1?v=4&s=320',
     );
     expect(sizedAvatar('https://example.com/me.png', 320)).toBe('https://example.com/me.png?s=320');
+  });
+});
+
+describe('showcase projects (private repos, SPEC F10)', () => {
+  const entry = {
+    name: 'duborsub',
+    title: 'Dub or Sub?',
+    description: 'Ratings demo',
+    demo: 'demos/duborsub/',
+    language: 'TypeScript',
+    topics: ['nextjs'],
+    createdAt: '2026-03-19T00:00:00Z',
+    updatedAt: '2026-11-09T00:00:00Z',
+  };
+
+  it('has a same-site demo link, no source link, and is marked private', () => {
+    const p = showcaseToProject(entry);
+    expect(p).toMatchObject({ url: null, demoUrl: 'demos/duborsub/', privateSource: true });
+    expect(p.categories).toEqual(['Live', 'Personal']);
+  });
+
+  it('sanitizes absolute demo URLs and rejects script URLs', () => {
+    expect(showcaseToProject({ ...entry, demo: 'https://duborsub.app' }).demoUrl).toBe(
+      'https://duborsub.app/',
+    );
+    expect(showcaseToProject({ ...entry, demo: 'javascript:alert(1)' }).demoUrl).toBeNull();
+  });
+
+  it('replaces a public repo of the same name and keeps the others', () => {
+    const repos = [
+      normalizeRepo(repo({ name: 'duborsub' }), null, opts),
+      normalizeRepo(repo({ name: 'other' }), null, opts),
+    ];
+    const merged = withShowcase(repos, [entry]);
+    expect(merged.map((p) => p.name)).toEqual(['other', 'duborsub']);
+    expect(merged.find((p) => p.name === 'duborsub')?.privateSource).toBe(true);
+    expect(merged.find((p) => p.name === 'other')?.privateSource).toBe(false);
   });
 });

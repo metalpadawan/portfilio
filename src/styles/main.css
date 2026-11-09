@@ -185,7 +185,9 @@ p {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: linear-gradient(180deg, rgb(5 6 13 / 0.85), rgb(5 6 13 / 0)) no-repeat;
+  /* Near-opaque behind the nav text, fading only at the bottom edge, so content scrolling
+     underneath never overlaps the links (fixed in v0.3.0). */
+  background: linear-gradient(180deg, rgb(5 6 13 / 0.94) 0 70%, rgb(5 6 13 / 0) 100%) no-repeat;
 }
 
 .nav {
@@ -741,6 +743,19 @@ p {
   gap: 10px;
   margin-top: auto;
   padding-top: 6px;
+}
+
+/* Private repository: shown instead of a Source link (SPEC F10). */
+.private-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 999px;
+  font: 500 0.8rem/1 var(--font-mono);
+  color: var(--text-muted);
 }
 
 .empty {

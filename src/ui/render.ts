@@ -21,19 +21,34 @@ function tags(project: Project): HTMLElement | null {
   );
 }
 
+function demoLink(project: Project, href: string): HTMLElement {
+  const label = `Live demo of ${project.title}`;
+  // Same-site demo pages open in place; external demos open in a new tab.
+  return /^https?:/i.test(href)
+    ? extLink(href, { class: 'btn btn--primary btn--sm', 'aria-label': label }, [
+        'Live demo',
+        icon('external', 14),
+      ])
+    : el('a', { href, class: 'btn btn--primary btn--sm', 'aria-label': label }, [
+        'Live demo',
+        icon('arrow', 14),
+      ]);
+}
+
 function links(project: Project): HTMLElement {
   return el('div', { class: 'card__links' }, [
-    project.demoUrl &&
-      extLink(
-        project.demoUrl,
-        { class: 'btn btn--primary btn--sm', 'aria-label': `Live demo of ${project.title}` },
-        ['Live demo', icon('external', 14)],
-      ),
-    extLink(
-      project.url,
-      { class: 'btn btn--ghost btn--sm', 'aria-label': `Source code of ${project.title}` },
-      [icon('github', 14), 'Source'],
-    ),
+    project.demoUrl && demoLink(project, project.demoUrl),
+    project.url
+      ? extLink(
+          project.url,
+          { class: 'btn btn--ghost btn--sm', 'aria-label': `Source code of ${project.title}` },
+          [icon('github', 14), 'Source'],
+        )
+      : el(
+          'span',
+          { class: 'private-badge', title: 'The source code of this project is private' },
+          [icon('lock', 13), 'Private source'],
+        ),
   ]);
 }
 

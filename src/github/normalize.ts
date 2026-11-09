@@ -1,6 +1,6 @@
 import { categorize } from '../projects/categorize';
-import type { DemoStatus, GitHubRepo, Project } from '../types';
-import { demoUrlFor } from './urls';
+import type { DemoStatus, GitHubRepo, Project, ShowcaseEntry } from '../types';
+import { demoUrlFor, safeUrl } from './urls';
 
 export { demoUrlFor, safeUrl } from './urls';
 
@@ -47,6 +47,7 @@ export function normalizeRepo(
     description,
     url: repo.html_url,
     demoUrl,
+    privateSource: false,
     language: repo.language,
     topics: repo.topics ?? [],
     stars: repo.stargazers_count,
@@ -57,4 +58,38 @@ export function normalizeRepo(
     updatedAt: repo.pushed_at || repo.updated_at,
     categories: categorize({ name: repo.name, fork: repo.fork, demoUrl }, opts.courseworkPrefixes),
   };
+}
+
+/**
+ * A showcase project (private repository): demo link, no source link (SPEC F10).
+ * Relative demo paths are same-site pages and are kept as-is; absolute ones are sanitized.
+ */
+export function showcaseToProject(entry: ShowcaseEntry): Project {
+  const demoUrl = /^[a-z0-9][a-z0-9/_-]*\/?$/i.test(entry.demo) ? entry.demo : safeUrl(entry.demo);
+  return {
+    name: entry.name,
+    title: entry.title,
+    description: entry.description,
+    url: null,
+    demoUrl,
+    privateSource: true,
+    language: entry.language,
+    topics: [...entry.topics],
+    stars: 0,
+    forks: 0,
+    fork: false,
+    archived: false,
+    createdAt: entry.createdAt,
+    updatedAt: entry.updatedAt,
+    categories: demoUrl ? ['Live', 'Personal'] : ['Personal'],
+  };
+}
+
+/** Repos plus showcase entries; a showcase entry replaces a repo of the same name. */
+export function withShowcase(
+  repos: readonly Project[],
+  showcase: readonly ShowcaseEntry[],
+): Project[] {
+  const names = new Set(showcase.map((s) => s.name));
+  return [...repos.filter((p) => !names.has(p.name)), ...showcase.map(showcaseToProject)];
 }
