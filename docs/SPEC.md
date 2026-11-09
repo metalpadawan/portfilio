@@ -65,4 +65,4 @@ unavailable.
 1. ~~**Display name and tagline.**~~ Resolved: taken from the public profile README (`metalpadawan/metalpadawan`). Edit in `src/config.ts`.
 2. **Hosting target.** The plan defaults to GitHub Pages through Actions. The build is a static `dist/`, so Vercel works too.
 3. **Coursework visibility.** All coursework (`wdd*`, `cse*`) is shown, tagged as _Coursework_. Say so if you'd rather hide some of it.
-4. **Repo descriptions.** Most repos have no description. The site falls back to README excerpts. Adding descriptions on GitHub (or overrides in config) will improve the cards a lot.
+4. ~~**Repo descriptions.**~~ Resolved in v0.2.0: written in `src/config.ts` from each repo's actual code. Adding "About" descriptions on GitHub is still worthwhile for GitHub itself.

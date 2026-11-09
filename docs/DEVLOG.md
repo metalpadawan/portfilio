@@ -196,3 +196,49 @@ TypeScript 6.0 pin (ADR-0005); `@types/node` kept at 24 to match the Node 24 run
   zero `backdrop-filter`. (True no-JS load could not be emulated: the QA tool blocks the CDP method.)
 - **Not verifiable here:** the WebGL frame cap and resize tolerance on real GPU hardware (headless has no GPU);
   both are covered by unit tests of their pure helpers.
+
+---
+
+## Step 8: Content, link previews, Lighthouse & a security sweep (v0.2.0) · 2026-11-09
+
+**Context:** the site went live at https://metalpadawan.github.io/portfilio/ (first deploy failed at
+`configure-pages` until Pages → Source was set to "GitHub Actions"; the re-run succeeded). The owner asked to "fix all"
+open items.
+
+**What**
+
+- **Descriptions from real code:** shallow-cloned all 21 repos (read-only, nothing executed) and fingerprinted each
+  (file tree, `package.json`, HTML `<title>`s, README headings). Wrote titles and descriptions in `config.ts` for every
+  repo that had none, e.g. `cse340` → "CSE Motors" (Express/EJS/PostgreSQL MVC), `crud-api` → "Books CRUD API"
+  (Mongoose, Google OAuth, Swagger), `wdd231` → "Calabar Chamber of Commerce". Claims were spot-checked
+  (e.g. `cse212` also covers linked lists and BSTs; `flight-site` really ships CSP/HSTS headers).
+- **Featured:** `hearty-home-site`, `duborsub`, `uni-project`, `flight-site` (live, real-client work first).
+- **Portfolio's own card:** titled "This Portfolio" with a description, instead of the slug "Portfilio".
+- **Link previews:** `public/og-image.png` (1200×630) rendered from `docs/design/og-image.html`; added
+  `config.siteUrl`, canonical link, `og:url`, absolute `og:image` (+ size/alt), `twitter:card`. The image avoids
+  a hard-coded project count so it can't go stale.
+- **Accessibility (from Lighthouse):** the "EN." logo link's `aria-label` didn't contain its visible text
+  (WCAG 2.5.3 Label in Name). Replaced with visually-hidden text: accessible name is now
+  "EN. Emmanuel Asukwo Ndem, back to top".
+
+**Lighthouse (live site, desktop):** Accessibility **100**, SEO **100**. Performance and Best Practices **not
+measured**: Chromium crashed mid-trace ("Peer disconnected") because the machine had ~0.8 GB of 7.9 GB RAM free.
+Local `chrome-launcher` also failed to start Edge/Chromium on Windows, and the keyless PageSpeed Insights quota was
+exhausted. Owner can run it at https://pagespeed.web.dev with the live URL.
+
+**Security sweep of the owner's other public repos** (values never printed; only key names/shapes):
+
+| Severity | Repo                         | Exposure                                                                                                                |
+| -------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Critical | `cse341`                     | MongoDB Atlas `mongodb+srv://user:password@…` hardcoded in `connection.js`, and `MONGODB_URI` in committed `week2/.env` |
+| High     | `backend-project-first`      | Committed `.env` with a 6-character `JWTSECRET`; SQLite DB file (`ourApp.db`) committed                                 |
+| Low      | `cse341/coopconnect/seed.js` | Seed-user passwords (likely demo data)                                                                                  |
+
+These live outside this repo and need the owner's accounts (rotate the Atlas password first; removing files does
+not remove them from git history). Reported to the owner with steps.
+
+**Process notes:** my failed Lighthouse launches left 19 headless Chromium processes across two sessions; all were
+stopped (matched only by my debug port/temp profile, never the owner's browsers).
+
+**Verification:** `npm run check` → 44/44, typecheck, lint, format; `npm run build` clean; built HTML has 0 unfilled
+`%tokens%`, absolute OG URLs, `og-image.png` in `dist/`; brand link accessible name confirmed from built markup.
