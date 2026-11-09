@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { defineConfig, type Plugin } from 'vitest/config';
 import { config } from './src/config.ts';
 import { sizedAvatar } from './src/github/urls.ts';
@@ -60,6 +61,13 @@ export default defineConfig({
   build: {
     target: 'es2022',
     sourcemap: true,
+    // Second page: the Dub or Sub? demo (ADR-0006).
+    rolldownOptions: {
+      input: {
+        main: fileURLToPath(new URL('./index.html', import.meta.url)),
+        duborsub: fileURLToPath(new URL('./demos/duborsub/index.html', import.meta.url)),
+      },
+    },
   },
   test: {
     include: ['tests/**/*.test.ts'],

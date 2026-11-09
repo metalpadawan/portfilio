@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dub or Sub? · Interactive demo</title>
+    <meta
+      name="description"
+      content="Interactive demo of Dub or Sub?, a site that rates the sub and the dub of every anime separately. Built by %displayName%."
+    />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f3f3f1" />
+    <link rel="canonical" href="%siteUrl%demos/duborsub/" />
+    <meta property="og:title" content="Dub or Sub? · Interactive demo" />
+    <meta
+      property="og:description"
+      content="Two versions. Two scores. Rate the sub and the dub of every anime."
+    />
+    <meta property="og:url" content="%siteUrl%demos/duborsub/" />
+    <meta property="og:image" content="%ogImage%" />
+    <link rel="icon" href="../../favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://s4.anilist.co" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap"
+    />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="wrap masthead__in">
+        <a class="brand" href="#/"
+          ><span class="brand__mark" aria-hidden="true"></span>Dub or Sub?</a
+        >
+        <span class="demo-badge">Demo</span>
+        <nav class="masthead__nav" aria-label="Demo">
+          <a class="drawn hide-narrow" href="#/">Collection</a>
+          <a class="drawn hide-narrow" href="#/request">Request a title</a>
+          <a class="btn btn--line btn--sm" href="../../#featured">← Portfolio</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="banner" role="note">
+      <div class="wrap banner__in">
+        <p>
+          <strong>Interactive demo.</strong> <span id="title-count">240</span> real titles from the
+          Dub or Sub? catalogue. Ratings and dub reports are
+          <strong>illustrative sample data</strong>, not real votes; anything you rate or report
+          stays in this browser.
+        </p>
+        <button type="button" class="text-action" id="reset-demo">Reset my demo data</button>
+      </div>
+    </div>
+
+    <main id="main" class="wrap" tabindex="-1"></main>
+
+    <footer class="colophon">
+      <div class="wrap colophon__in">
+        <p class="display colophon__title">Watched it?<br />Rate both versions.</p>
+        <p class="colophon__lede">
+          This is a front-end demonstration. The full app adds accounts with email confirmation,
+          notes, admin moderation and the complete catalogue of about 38,000 titles. Its source is
+          private.
+        </p>
+        <p class="colophon__actions">
+          <a class="btn btn--white" href="#/">Browse the collection</a>
+          <a class="btn btn--outline" href="../../#featured">Back to %displayName%’s portfolio</a>
+        </p>
+        <div class="colophon__foot">
+          <p>
+            Catalogue sample derived from
+            <a
+              href="https://github.com/manami-project/anime-offline-database"
+              rel="noopener noreferrer"
+              target="_blank"
+              >anime-offline-database</a
+            >
+            by manami-project, under the
+            <a
+              href="https://opendatacommons.org/licenses/odbl/1-0/"
+              rel="noopener noreferrer"
+              target="_blank"
+              >ODbL v1.0</a
+            >
+            (contents under the DbCL v1.0). This derived sample is also made available under the
+            ODbL.
+          </p>
+          <p>
+            English and Japanese titles, genres, studios and cover images:
+            <a href="https://anilist.co" rel="noopener noreferrer" target="_blank">AniList</a> and
+            its contributors. Dub or Sub? and this demo by %displayName%.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/demos/duborsub/main.ts"></script>
+  </body>
+</html>
