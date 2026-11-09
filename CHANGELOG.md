@@ -5,6 +5,22 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-09
+
+### Added
+
+- Interactive Dub or Sub? demo at `demos/duborsub/`: search (English, romaji, Japanese), sort and genre tabs, work pages
+  with sub/dub measures and distributions, rating tiles, dub reports and title requests, in the app's own design.
+- Private projects can be listed with a live demo and a "Private source" badge (`showcase` in config).
+
+### Changed
+
+- Dub or Sub? is shown as a private project with a live demo instead of a repository link.
+
+### Fixed
+
+- Page content no longer shows through the navigation links while scrolling.
+
 ## [0.2.1] - 2026-11-09
 
 ### Fixed
