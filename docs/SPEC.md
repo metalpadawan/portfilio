@@ -32,6 +32,15 @@ unavailable.
 | F8  | Owner-editable `src/config.ts` for name, tagline, exclusions, title + description overrides, featured pins                                                                                                                                                    | Must     |
 | F9  | Deep-linkable filter state via URL query (`?q=&lang=&cat=&sort=`)                                                                                                                                                                                             | Could    |
 
+### 3a. Private projects & demos (added v0.3.0, ADR-0006)
+
+| ID  | Requirement                                                                                                                                                                                                                                                                                                                                 | Priority |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| F10 | Projects whose repo is private are listed from a `showcase` entry in `config.ts`, with **Live demo** and a "Private source" badge and no source link                                                                                                                                                                                        | Must     |
+| F11 | `demos/duborsub/`: an interactive demo of Dub or Sub? in AniRate's design system: search (English, romaji, Japanese), sort tabs (popularity, rating, votes, year, title), genre tabs, paging, work view with sub/dub measures, verdict and distributions, 1–5 rating tiles per version, dub reports (3 put a dub on record), title requests | Must     |
+| F12 | Demo data: a sample of real catalogue titles (ODbL, credited, licence kept); every rating/dub value is **labelled sample data**; visitor actions persist only in their browser and update figures live                                                                                                                                      | Must     |
+| F13 | Demo is deep-linkable (`#/?q=&sort=&genre=&page=`, `#/work/<id>`), keyboard-first ("/" focuses search), respects reduced motion, works at 375 px                                                                                                                                                                                            | Should   |
+
 ## 4. Background animation requirements
 
 | ID  | Requirement                                                                                                                                                    |

@@ -54,14 +54,30 @@
 - CI workflow (`check` + `build`) and GitHub Pages deploy workflow with a scheduled snapshot refresh.
 - **Gate:** `npm run check && npm run build` green; production preview reviewed.
 
+## Phase 7: Dub or Sub? demo (F10–F13, ADR-0006) ✅
+
+1. **Data:** `scripts/build-duborsub-sample.ts` builds a ~240-title sample (most popular TV/movies with covers) from the
+   owner's local catalogue, plus AniList English/Japanese titles and genres, into `src/demos/duborsub/data/sample.json`,
+   with the ODbL credit embedded.
+2. **Pure model** (`src/demos/duborsub/model.ts`, tested): verdict (leader, gap, wording), deterministic sample ratings
+   with consistent distributions, merging visitor ratings, dub-report threshold, search normalisation, sort/filter/page,
+   and route parsing.
+3. **Views and styles:** AniRate tokens (plaster, ink, Klein; Archivo with width axis; square corners), checklist rows,
+   work view, rating tiles, notices, typeset no-cover plate, black-wall colophon with credits.
+4. **Portfolio integration:** `showcase` config, `Project.url` nullable plus `privateSource`, a "Private source" badge,
+   the internal demo link, and a second Vite entry.
+5. **Gate:** `npm run check` green; build emits `demos/duborsub/index.html`; browser QA of search, sort, rate, report,
+   request, deep links, 375 px, reduced motion; Lighthouse accessibility on the demo page.
+
 ## Requirement traceability
 
-| Req    | Phase | Module                                 |
-| ------ | ----- | -------------------------------------- |
-| F1–F3  | 3     | `github/*`, `scripts/fetch-repos.mjs`  |
-| F4, F9 | 4     | `projects/filter.ts`, `ui/controls.ts` |
-| F5     | 3     | `projects/categorize.ts`               |
-| F6, F7 | 4     | `ui/render.ts`                         |
-| F8     | 3     | `config.ts`                            |
-| B1–B8  | 5     | `bg/*`                                 |
-| NFRs   | 6     | all                                    |
+| Req     | Phase | Module                                                                        |
+| ------- | ----- | ----------------------------------------------------------------------------- |
+| F1–F3   | 3     | `github/*`, `scripts/fetch-repos.mjs`                                         |
+| F4, F9  | 4     | `projects/filter.ts`, `ui/controls.ts`                                        |
+| F5      | 3     | `projects/categorize.ts`                                                      |
+| F6, F7  | 4     | `ui/render.ts`                                                                |
+| F8      | 3     | `config.ts`                                                                   |
+| B1–B8   | 5     | `bg/*`                                                                        |
+| NFRs    | 6     | all                                                                           |
+| F10–F13 | 7     | `config.showcase`, `src/demos/duborsub/*`, `scripts/build-duborsub-sample.ts` |
