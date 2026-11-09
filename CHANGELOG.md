@@ -5,6 +5,22 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-09
+
+### Added
+
+- Titles and descriptions for every project, written from each repository's actual code.
+- Link-preview image and metadata (canonical URL, Open Graph, Twitter card) for LinkedIn/WhatsApp/X shares.
+
+### Changed
+
+- Featured projects: Hearty Home, Dub or Sub?, University Attendance Platform, AeroNexus Charter.
+- The portfolio's own repository is shown as "This Portfolio".
+
+### Fixed
+
+- Logo link's accessible name now includes its visible text (WCAG 2.5.3).
+
 ## [0.1.1] - 2026-11-09
 
 ### Fixed
