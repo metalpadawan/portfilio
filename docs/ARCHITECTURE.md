@@ -40,6 +40,23 @@ tests/*.test.ts             # Vitest unit tests for pure modules
 .github/workflows/          # ci.yml (check + build), deploy.yml (snapshot → build → Pages, daily)
 ```
 
+## Dub or Sub? demo (second page, ADR-0006)
+
+```
+demos/duborsub/index.html     # Vite entry 2 (AniRate shell: masthead, sample-data banner, colophon + ODbL credits)
+src/demos/duborsub/
+├── main.ts                   # hash router (#/?q=&sort=&genre=&page=, #/work/<id>, #/request), focus management
+├── model.ts                  # pure: describeSplit (ported from the app), sample stats, visitor merge, search/sort/page
+├── views.ts                  # collection, work, request pages
+├── ui.ts                     # Measure, distribution, plate, rating tiles, notices
+├── store.ts                  # visitor state in localStorage (validated, fails soft)
+├── styles.css                # AniRate design system (plaster/ink/Klein, Archivo, square corners)
+└── data/sample.json          # 240 titles; built by scripts/build-duborsub-sample.ts from the private repo
+```
+
+Private repos are listed through `config.showcase` → `withShowcase()` in `github/normalize.ts`
+(`Project.url = null`, `privateSource = true`, same-site demo link).
+
 ## Data flow
 
 ```

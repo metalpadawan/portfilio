@@ -17,6 +17,7 @@ build-time snapshot fallback.
 - `npm run check`: typecheck + lint + format check + unit tests (must pass before done)
 - `npm run build`: production build to `dist/`
 - `npm run snapshot`: refresh `src/data/repos.json` from the GitHub API
+- `node scripts/build-duborsub-sample.ts <duborsub>/apps/anirate-base/backend/.data/catalog`: rebuild the demo sample (needs the private repo locally)
 
 ## Rules
 

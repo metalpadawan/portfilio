@@ -23,6 +23,13 @@ npm run dev        # http://localhost:5173
 
 Requires Node ≥ 22.18 (Node 24 recommended).
 
+## Dub or Sub? demo
+
+[`demos/duborsub/`](demos/duborsub/index.html) is a playable demo of a private full-stack project, built in
+that app's own design system with a 240-title sample of its real catalogue (ODbL, credited). Ratings and dub reports
+are labelled sample data; visitors' own ratings stay in their browser. See [ADR-0006](docs/adr/0006-duborsub-in-portfolio-demo.md).
+Private projects are listed via `showcase` in `src/config.ts`.
+
 ## Making it yours
 
 Everything personal lives in [`src/config.ts`](src/config.ts): name, role, tagline, skills, links,

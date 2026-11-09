@@ -258,3 +258,53 @@ gradient's darkest first row again (`rgb(5 6 13 / 0.85)`): a near-black line tha
 69px → 68px.
 
 **Verification:** before/after screenshots at the same scroll position (y=260) show the line gone; `npm run check` 44/44.
+
+---
+
+## Step 10: Dub or Sub? interactive demo (v0.3.0) · 2026-11-09
+
+**Request:** the owner made `duborsub` private and asked for a live demonstration on the portfolio instead of the repo.
+
+**Discovery:** the local clone shows a full-stack app ("AniRate"): Next.js client (React Query + axios), NestJS API,
+PostgreSQL/Prisma, email accounts, admin moderation. It was never deployed (`SITE_DOMAIN` empty; only domain keys were
+read from `.env.production`, no secrets). The catalogue (38,009 titles) is anime-offline-database (ODbL + DbCL), plus
+AniList. Ratings and dub reports are user-generated, and none exist publicly.
+
+**Decision:** the owner chose an in-portfolio demo over deploying the real app (ADR-0006). Plan written first: SPEC F10–F13, PLAN Phase 7.
+
+**What**
+
+- `scripts/build-duborsub-sample.ts`: 240 most-popular TV/movie/ONA titles; factual fields only. All 600 top AniList
+  titles matched the ODbL catalogue and had covers.
+- `src/demos/duborsub/`: model (with `describeSplit` and verdict wording **ported verbatim** from the real app's
+  `lib/scores.ts` / `AnimeDetail.tsx`), views, components and styles in AniRate's DESIGN.md (plaster, ink, single Klein
+  blue, Archivo width axis, square corners, Measure, Rating Tiles, black-wall colophon). The real home copy is reused
+  ("Two versions. Two scores.").
+- **Data honesty:** ratings and dub status are deterministic _illustrative_ values, never stored as data; every row and
+  split carries a "Sample" tag, and a persistent banner says they are not real votes. Visitor ratings, dub reports and
+  requests live only in `localStorage` (validated on read) and update figures live. ODbL credit and licence notice in the colophon.
+- Portfolio: `config.showcase` + `withShowcase()`; `Project.url` nullable; "Private source" badge; same-site demo link;
+  Vite multi-page build (`rolldownOptions.input`).
+- Header readability: the nav background is now near-opaque through the link row (content scrolled under it had overlapped the links).
+
+**Found and fixed in browser QA**
+
+- Navigating to a work left focus on `<body>`: the View Transition swaps asynchronously, so focus ran against the old page.
+  Focus/scroll now run inside the swap callback.
+- Focus restore by `aria-label` was ambiguous (sub and dub tiles are both "5 of 5"); tiles now carry `data-focus-key`.
+- When the report button disappears (dub goes on record), focus falls back to the "Your rating" heading.
+- Mobile work page: cover reduced to an 8.5rem frame at ≤480px (DESIGN.md rule).
+- Tried AniList `/extraLarge/` covers for sharper hung images: different filenames (404), so reverted.
+
+**Verification**
+
+- `npm run check`: 62/62 tests (+18: model, showcase merge). Build emits `dist/demos/duborsub/index.html`; demo JS+data
+  34 KB gzip, loaded only on the demo page.
+- Browser (production build): 240 works, 24 per page, covers load, no console errors; rating sub 5 → count 38 → 39,
+  `aria-pressed`, "Saved." status, focus kept, persisted; Tokyo Ghoul (2 reports) → report → "dub is now on record" → dub
+  tiles appear → rating dub 4 updates the verdict; request validation and confirmation; Japanese search (進撃 → 6 titles);
+  deep link `?sort=votes&genre=Romance&page=2` → "Page 2 of 3"; empty state; 375 px with no horizontal overflow.
+- Portfolio card: "Live demo → demos/duborsub/" + "Private source", in Featured and All projects.
+
+**Noticed:** `hearty-home-site` and `uni-project` are also no longer public (20 public repos). They drop out of the
+portfolio at the next snapshot refresh; whether to showcase them is the owner's call.
