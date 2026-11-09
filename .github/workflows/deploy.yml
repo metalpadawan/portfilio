@@ -1,0 +1,54 @@
+# Build and deploy to GitHub Pages (ADR-0004).
+# Runs on every push to main, daily (to refresh the project snapshot, ADR-0003), or manually.
+# One-time setup: repo Settings → Pages → Source: "GitHub Actions".
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 4 * * *' # daily, off the top of the hour
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Refresh project snapshot
+        # The script never overwrites the committed snapshot on failure, so a
+        # GitHub API hiccup degrades to the last good data instead of failing the deploy.
+        continue-on-error: true
+        run: npm run snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npm run check
+      - run: npm run build
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
