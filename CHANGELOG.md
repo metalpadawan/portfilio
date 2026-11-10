@@ -5,6 +5,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-10
+
+### Added
+
+- About section with a personal story, interests ("Off the clock") and a highlighted personal aim, beside the skills list.
+
 ## [0.3.0] - 2026-11-09
 
 ### Added

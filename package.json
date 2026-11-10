@@ -1,7 +1,7 @@
 {
   "name": "metalpadawan-portfolio",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Portfolio of metalpadawan's GitHub projects with a WebGL2 animated background.",
   "type": "module",
   "engines": {
