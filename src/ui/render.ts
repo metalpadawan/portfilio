@@ -116,3 +116,17 @@ export function renderStats(container: HTMLElement, stats: ProfileStats): void {
 export function renderSkills(container: HTMLElement, skills: readonly string[]): void {
   container.replaceChildren(...skills.map((s) => el('li', { class: 'skill' }, [s])));
 }
+
+export function renderInterests(
+  container: HTMLElement,
+  interests: readonly { label: string; note: string | null }[],
+): void {
+  container.replaceChildren(
+    ...interests.map((i) =>
+      el('li', { class: 'interest' }, [
+        el('span', { class: 'interest__label' }, [i.label]),
+        i.note && el('span', { class: 'interest__note' }, [i.note]),
+      ]),
+    ),
+  );
+}

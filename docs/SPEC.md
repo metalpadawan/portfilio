@@ -32,6 +32,12 @@ unavailable.
 | F8  | Owner-editable `src/config.ts` for name, tagline, exclusions, title + description overrides, featured pins                                                                                                                                                    | Must     |
 | F9  | Deep-linkable filter state via URL query (`?q=&lang=&cat=&sort=`)                                                                                                                                                                                             | Could    |
 
+### 3b. About section (added v0.4.0)
+
+| ID  | Requirement                                                                                                                                                                                                                                                                                               | Priority |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| F14 | About section tells the owner's story in their own voice, professionally: role and approach, interests ("Off the clock"), and their long-term aim as a highlighted statement, beside the skills list. All text lives in `config.about` / `config.interests`; the story is in the static HTML (SEO, no-JS) | Must     |
+
 ### 3a. Private projects & demos (added v0.3.0, ADR-0006)
 
 | ID  | Requirement                                                                                                                                                                                                                                                                                                                                 | Priority |

@@ -42,6 +42,10 @@ function htmlFromConfig(): Plugin {
         email: config.links.email,
         avatar: snapshot.user.avatar_url,
         avatarSized: sizedAvatar(snapshot.user.avatar_url, 320),
+        aboutHeading: config.about.heading,
+        aboutLead: config.about.lead,
+        aboutPersonal: config.about.personal,
+        aboutAim: config.about.aim,
         siteUrl: config.siteUrl,
         // Link previews need an absolute image URL; the file ships from public/.
         ogImage: new URL('og-image.png', config.siteUrl).href,

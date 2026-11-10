@@ -772,6 +772,85 @@ p {
 /* ==========================================================================
    About & footer
    ========================================================================== */
+/* About (SPEC F14): story on the left, interests and tools on the right. */
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.about__story {
+  display: grid;
+  gap: 18px;
+  max-width: 64ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+.about__lead {
+  font: 500 clamp(1.15rem, 1.8vw, 1.35rem) / 1.55 var(--font-display);
+  color: var(--text);
+}
+.about__aim {
+  margin: 10px 0 0;
+  padding: 18px 22px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--surface);
+  font: 500 clamp(1.05rem, 1.6vw, 1.2rem) / 1.55 var(--font-display);
+  color: var(--text);
+}
+.about__aim p {
+  margin: 0;
+}
+.about__side {
+  display: grid;
+  gap: 14px;
+}
+.about__label {
+  margin-top: 6px;
+  font: 500 0.78rem/1.2 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.about__label:first-child {
+  margin-top: 0;
+}
+.interests {
+  display: grid;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.interest {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 12px 18px;
+}
+.interest + .interest {
+  border-top: 1px solid var(--border);
+}
+.interest__label {
+  font-weight: 600;
+  color: var(--text);
+}
+.interest__note {
+  font: 400 0.82rem/1.4 var(--font-mono);
+  color: var(--text-muted);
+}
+@media (max-width: 860px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .skills {
   display: flex;
   flex-wrap: wrap;

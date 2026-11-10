@@ -8,7 +8,13 @@ import { computeStats } from './projects/stats';
 import type { FilterState, Project, Snapshot, SnapshotRepo } from './types';
 import { initControls } from './ui/controls';
 import { animateCounters, enableTilt, observeReveal } from './ui/effects';
-import { renderFeatured, renderGrid, renderSkills, renderStats } from './ui/render';
+import {
+  renderFeatured,
+  renderGrid,
+  renderInterests,
+  renderSkills,
+  renderStats,
+} from './ui/render';
 
 const snapshot = snapshotJson as Snapshot;
 
@@ -38,6 +44,7 @@ const dom = {
   empty: $('empty-state'),
   status: $('data-status'),
   skills: $('skills'),
+  interests: $('interests'),
 };
 
 let projects = toProjects(snapshot.repos);
@@ -73,6 +80,7 @@ const controls = initControls(
 );
 
 renderSkills(dom.skills, config.skills);
+renderInterests(dom.interests, config.interests);
 renderAll(controls.getState(), true);
 enableTilt(dom.grid);
 enableTilt(dom.featured);

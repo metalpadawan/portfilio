@@ -150,9 +150,21 @@
       <section class="section container about" id="about" aria-labelledby="about-title">
         <header class="section__head" data-reveal>
           <p class="eyebrow">03 · About</p>
-          <h2 id="about-title">Tools I work with</h2>
+          <h2 id="about-title">%aboutHeading%</h2>
         </header>
-        <ul class="skills" id="skills" data-reveal></ul>
+        <div class="about__grid">
+          <div class="about__story" data-reveal>
+            <p class="about__lead">%aboutLead%</p>
+            <p>%aboutPersonal%</p>
+            <blockquote class="about__aim"><p>%aboutAim%</p></blockquote>
+          </div>
+          <div class="about__side" data-reveal>
+            <h3 class="about__label">Off the clock</h3>
+            <ul class="interests" id="interests"></ul>
+            <h3 class="about__label">Tools I work with</h3>
+            <ul class="skills" id="skills"></ul>
+          </div>
+        </div>
       </section>
     </main>
 

@@ -14,6 +14,24 @@ export const config = {
   intro:
     'Computer Programming student at BYU–Idaho and Project Manager at Ten24Bit. Below is every public project on my GitHub, pulled live from the API: deployed sites, full-stack apps and coursework.',
 
+  /** About section (SPEC F14). Written in the owner's voice; plain text only. */
+  about: {
+    heading: 'A little about me',
+    lead: 'I’m a Computer Programming student at BYU–Idaho and a Project Manager at Ten24Bit, based in Calabar, Nigeria. I enjoy taking a loose idea and shaping it into software that works, and I care just as much about how it feels to the person using it.',
+    personal:
+      'Away from the keyboard, you’ll usually find me deep in an anime series, playing games (mostly on mobile, which absolutely counts), out on the badminton court, or hunting down good food. I’m a fantasy reader and listener at heart, and The Silmarillion is my favourite: proof that the richest worlds are built patiently, one careful detail at a time.',
+    aim: 'My dream is simple: to leave a legacy that strengthens anyone, regardless of race or background, and helps build a better future.',
+  },
+
+  /** "Off the clock" list in the About section. */
+  interests: [
+    { label: 'Anime', note: null },
+    { label: 'Gaming', note: 'Mostly mobile, and it counts' },
+    { label: 'Badminton', note: null },
+    { label: 'Good food', note: null },
+    { label: 'Fantasy', note: 'Books & audiobooks · The Silmarillion' },
+  ] as readonly { label: string; note: string | null }[],
+
   skills: [
     'JavaScript',
     'TypeScript',
