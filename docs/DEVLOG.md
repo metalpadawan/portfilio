@@ -308,3 +308,24 @@ AniList. Ratings and dub reports are user-generated, and none exist publicly.
 
 **Noticed:** `hearty-home-site` and `uni-project` are also no longer public (20 public repos). They drop out of the
 portfolio at the next snapshot refresh; whether to showcase them is the owner's call.
+
+---
+
+## Step 11: About section rewrite (v0.4.0) · 2026-11-10
+
+**Request:** add a personal "about" in the owner's voice, professional in register: anime, gaming (mostly mobile),
+badminton, good food, fantasy books and audiobooks (favourite: _The Silmarillion_), and a life goal of leaving a legacy
+that strengthens anyone regardless of race and helps the future.
+
+**What**
+
+- SPEC F14 added first. Copy lives in `config.about` (heading, lead, personal, aim) and `config.interests`.
+- The section now has two columns: the story (lead, personal paragraph, aim as a highlighted pull-quote) beside "Off the
+  clock" (interests with short notes) and "Tools I work with". It stacks below 860px.
+- Story text is injected into the static HTML by the `html-from-config` plugin (SEO, no-JS); interests render via `el()`.
+- Editorial choices: "regardless of race" kept and broadened to "regardless of race or background"; the gaming aside
+  kept in the owner's voice ("which absolutely counts"); _Silmarillions_ → _The Silmarillion_; the fantasy line ties
+  patient world-building to craft, to fit a professional portfolio.
+
+**Verification:** built HTML contains the story with 0 unfilled tokens; desktop and 375px screenshots reviewed with no
+horizontal overflow; `npm run check` green.
